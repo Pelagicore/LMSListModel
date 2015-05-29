@@ -113,6 +113,19 @@ ApplicationWindow {
                 }
             }
 
+            RadioButton {
+                id: videosRadioButton
+                text: qsTr("Videos")
+                anchors.left: albumsRadioButton.right
+                anchors.leftMargin: 0
+                exclusiveGroup: queryGroup
+                onCheckedChanged: {
+                    if (checked) {
+                        mainListModel.queryType = LMSListModel.Videos
+                    }
+                }
+            }
+
             CheckBox {
                 id: adeleCheckbox
                 text: qsTr("I only like Adele!")

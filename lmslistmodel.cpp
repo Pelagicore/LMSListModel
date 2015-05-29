@@ -79,7 +79,7 @@ void LMSListModel::setQueryType(QueryType type){
                             "LEFT JOIN audio_artists ON audios.artist_id = audio_artists.id "
                             "LEFT JOIN audio_albums ON audio_artists.id = audio_albums.artist_id "
                             "LEFT JOIN files ON audios.id = files.id";
-        m_allItemsCountQuery = "SELECT COUNT(id) FROM files;";
+        m_allItemsCountQuery = "SELECT COUNT(id) FROM files;"; //Shouldn't this be audios?
         break;
     }
     case Albums: {
@@ -95,6 +95,14 @@ void LMSListModel::setQueryType(QueryType type){
         m_allItemsQuery = "SELECT audio_artists.id as id, "
                                  "audio_artists.name as title FROM audio_artists ";
         m_allItemsCountQuery = "SELECT COUNT(id) FROM audio_artists;";
+        break;
+    }
+    case Videos: {
+        m_allItemsQuery = "SELECT videos.id as id, videos.title as title, "
+                                 "videos.artist as artist, files.path as path "
+                                 "FROM videos LEFT JOIN files ON videos.id = files.id";
+        m_allItemsCountQuery = "SELECT COUNT(id) FROM videos;";
+        break;
     }
     default: {
         qDebug() << "Unhandled case in" << __FUNCTION__;

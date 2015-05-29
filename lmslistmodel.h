@@ -38,7 +38,8 @@ public:
     typedef enum {
         Artists,
         Albums,
-        Tracks
+        Tracks,
+        Videos
     } QueryType;
 
     LMSListModel(QObject *parent = 0);
